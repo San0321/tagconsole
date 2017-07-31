@@ -1,0 +1,23 @@
+{
+  "name": "tagconsole",
+  "version": "1.0.0",
+  "description": "Tag Console for Client Side",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www"
+  },
+  "author": "Do Pham and San Kang",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "github": "^9.2.0",
+    "jade": "^1.11.0",
+    "morgan": "^1.8.2",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.4.3"
+  }
+}

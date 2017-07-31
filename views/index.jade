@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    h1= title
+    p Express
+    input#filter(placeholder='Name or ID', type='text')
+    #wrapper
+        h2 Tag List
+        #tagList
+            table
+                thead
+                    th tagID
+                    th tagName
+                tbody
