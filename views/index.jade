@@ -1,14 +1,16 @@
 extends layout
 
 block content
-    h1= title
-    p Express
-    input#filter(placeholder='Name or ID', type='text')
-    #wrapper
-        h2 Tag List
-        #tagList
-            table
-                thead
-                    th tagID
-                    th tagName
-                tbody
+    .row
+        .col-lg-offset-5.col-lg-2
+            input#filter(placeholder='Name or ID', type='text')
+        .col-lg-offset-4.col-lg-4
+            #wrapper
+                br
+                #tagList
+                    table
+                        thead
+                            th Tag ID
+                            th Tag Name
+                            th Deprecated
+                        tbody

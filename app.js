@@ -41,7 +41,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Expose github file
-app.use('/taglist', function(req,res,next){
+app.use('/', function(req,res,next){
     req.git = github;
     next();
 });

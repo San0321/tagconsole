@@ -1,8 +1,22 @@
 doctype html
 html
     head
-        title= title
-    body
-        block content
+        title= "Tag Console"
+        link(rel='stylesheet', href='/styles/style.css')
         script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+        link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
+    body
+        .row
+            .col-lg-1
+                ul.nav.nav-pills.nav-stacked
+                  li
+                      a(href='/') All Tags
+                  li
+                      a(href='/top50') Top 50
+                  li
+                      a(href='#') ID Hold
+        block content
+        br
+        br
         script(src='/javascripts/main.js')
