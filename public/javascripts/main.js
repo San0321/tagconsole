@@ -46,7 +46,6 @@ function displayTags() {
           (function(x){
 
            $.get('/top50/dates?id=' + topTagsIDs[x], function(res) {
-              console.log(res);
               topTagsInfo[topTagsIDs[x]] = res[topTagsIDs[x]];
               tableContent += '<tr>';
               tableContent += '<td>' + topTagsIDs[x] + '</td>';
