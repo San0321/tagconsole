@@ -66,6 +66,23 @@ function displayTags() {
       }
       break;
 
+      case '/idhold':{
+
+       $.get('/idhold/read', function(res) {
+         console.log(res);
+         for (var i = 0; i < res.length; i++) {
+          tableContent += '<tr>';
+          tableContent += '<td>' + res[i]._id + '</td>';
+          tableContent += '<td>' + 'Random' + '</td>';
+          tableContent += '</tr>';
+          $('#tagList table tbody').html(tableContent);
+        }
+
+       });
+
+      }
+      break;
+
       default:
       break;
     }

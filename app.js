@@ -5,6 +5,19 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var GitHubApi = require("github");
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/mydb";
+
+
+// Init Database
+var database;
+
+MongoClient.connect(url, function(err, db){
+if(err) throw err;
+    database = db;
+  //  db.close();
+});
+
 
 //Init github
 var github = new GitHubApi({
@@ -25,6 +38,7 @@ var github = new GitHubApi({
 const index = require('./routes/index');
 const list = require('./routes/taglist');
 const top50 = require('./routes/top50');
+const idhold = require('./routes/idhold');
 
 //Init app
 const app = express();
@@ -40,6 +54,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// Expose mongo to idhold
+app.use('/idhold',function(req,res,next) {
+    req.db = database;
+    next();
+});
+
 //Expose github file
 app.use('/', function(req,res,next){
     req.git = github;
@@ -50,6 +71,7 @@ app.use('/', function(req,res,next){
 app.use('/', index);
 app.use('/top50', top50);
 app.use('/taglist', list);
+app.use('/idhold', idhold);
 
 module.exports = app;
 

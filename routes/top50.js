@@ -13,7 +13,7 @@ router.get('/dates', function(req, res, next){
         type: "oauth",
         token: priv.key
     });
-    console.log(req.query);
+    //console.log(req.query);
     var topLastUpdated = {};
     git.repos.getCommits({ 
         owner: "dompham",
