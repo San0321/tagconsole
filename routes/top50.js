@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-//var priv = require('../private/javascripts/gitkey.js');
+var priv = require('../private/javascripts/gitkey.js');
 
 /* GET top50 */
 router.get('/', function(req, res, next) {
@@ -11,7 +11,7 @@ router.get('/dates', function(req, res, next){
     var git = req.git;
     git.authenticate({
         type: "oauth",
-        token: process.env.GIT_KEY
+        token: priv.key
     });
     console.log(req.query);
     var topLastUpdated = {};
