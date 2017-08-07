@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var priv = require('../private/javascripts/gitkey.js');
+
 
 router.get('/tags', function(req, res) {
     var git = req.git;
     git.authenticate({
         type: "oauth",
-        token: priv.key
+        token: process.env.GIT_TOKEN
     });
 
     git.repos.getContent({owner: "dompham", repo:"utui",path:"src/utui/dict/config/resource.json"}, function(err,data) {
