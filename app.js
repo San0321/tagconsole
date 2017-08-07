@@ -13,9 +13,11 @@ var url = process.env.MONGO_URI;
 var database;
 
 MongoClient.connect(url, function(err, db){
-if(err) throw err;
-    database = db;
-  //  db.close();
+    if(err) {
+        console.log(err);
+    } else {
+        database = db;
+    }
 });
 
 

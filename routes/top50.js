@@ -19,8 +19,12 @@ router.get('/dates', function(req, res, next){
         repo: "utui",
         path: "stratocaster/templates/utag." + req.query.id + ".js"
     }, function (err,data) {
-    topLastUpdated[req.query.id] = data.data[0].commit.author.date;
-    res.json(topLastUpdated);
+        if (err) {
+            res.sendStatus(err.code)
+        } else {
+            topLastUpdated[req.query.id] = data.data[0].commit.author.date;
+            res.json(topLastUpdated);
+        }
     });
 
 })

@@ -12,10 +12,12 @@ router.get('/read', function(req, res) {
     var db = req.db;
 
     db.collection("reserved").find().toArray(function(err, result) {
-        if (err) throw err;
-     //   initData = result;
-        res.send(result);
-       // res.json(result);
+        if (err) {
+        	console.log(err);
+        }
+        else {
+        	res.send(result);
+        }
 	})
 });
 
@@ -28,21 +30,27 @@ router.post('/insert',function(req, res) {
 	var db = req.db;
 	// 
     db.collection('reserved').find().sort({'id': 1 }).toArray(function(err, current) {
-        if (err) throw err;
+        if (err) {
+        	console.log(err);
+        } else {
 
-        for (var i = 0; i < current.length; i++) {
-			if (current[i].id === tagId) {
-				tagId = parseInt(tagId, 10);
-				tagId++;
-				tagId = tagId.toString();
+	        for (var i = 0; i < current.length; i++) {
+				if (current[i].id === tagId) {
+					tagId = parseInt(tagId, 10);
+					tagId++;
+					tagId = tagId.toString();
+				}
 			}
+
+			db.collection('reserved').insertOne({"id": tagId, "name": tagName }, function(err, result){
+				if (err) {
+					console.log(err);
+				} else {
+
+					res.send({"id": tagId, "name": tagName });	
+				}
+			});
 		}
-
-		db.collection('reserved').insertOne({"id": tagId, "name": tagName }, function(err, result){
-			if (err) throw err;
-
-			res.send({"id": tagId, "name": tagName });	
-		});
     })
 });
 
@@ -55,7 +63,10 @@ router.post('/delete', function(req, res){
 	// for button click deletion
 	if (req.body.id) {
 		db.collection('reserved').deleteOne({"id": req.body.id.toString()}, function(err, result){
-	 		if (err) throw err;	
+	 		if (err) {
+	 			console.log(err);
+	 			res.sendStatus(err);
+	 		}
 		})
 	} 
 
@@ -64,7 +75,10 @@ router.post('/delete', function(req, res){
 		itemsToBeDeleted = JSON.parse(itemsToBeDeleted);
 		for (var i = 0; i < itemsToBeDeleted.length; i++ ) {
 			db.collection('reserved').deleteOne({"id": itemsToBeDeleted[i].toString()}, function(err, result){
-	 			if (err) throw err;	
+	 			if (err) {
+	 				console.log(err);
+	 				res.sendStatus(err);
+	 			}
 			})
 		}
 	} 

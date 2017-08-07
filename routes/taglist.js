@@ -10,9 +10,13 @@ router.get('/tags', function(req, res) {
     });
 
     git.repos.getContent({owner: "dompham", repo:"utui",path:"src/utui/dict/config/resource.json"}, function(err,data) {
-    var b64string = data.data.content;
-    var buf = new Buffer.from(b64string, 'base64').toString("utf8");
-    res.json(buf);
+        if (err) {
+            res.sendStatus(err.code);
+        } else {
+            var b64string = data.data.content;
+            var buf = new Buffer.from(b64string, 'base64').toString("utf8");
+            res.json(buf);
+        }
     });
 });
 
