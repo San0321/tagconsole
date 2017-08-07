@@ -6,6 +6,10 @@ body {
 h3 {
     color: #d6d6d6 !important;
 }
+#holder {
+    display: inline-block !important;
+}
+
 .center-header {
     text-align: center;
 }

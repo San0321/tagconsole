@@ -1,12 +1,15 @@
 extends layout
 
 block content
-    .row
-        .col-lg-offset-5.col-lg-2
-                input#filter(placeholder='Name or ID', type='text')
 
+    .row
+        .col-lg-offset-5.col-lg-4
+                input#holder(placeholder='Name or ID', type='text')  
+                button#idreserver() Add
+
+    .row
         .col-lg-offset-4.col-lg-4
-        
+ 
             #wrapper
                 br
                 #tagList
