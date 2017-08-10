@@ -182,7 +182,18 @@ function displayTags() {
     }
     // get the first alphabet
     idNumber = tagNametobeInserted[0].toUpperCase(); 
-    idNumber = ((idNumber.charCodeAt(0)-63)*1000); // 2000
+    idNumber = idNumber.charCodeAt(0);
+
+
+    // catch non-alphabets
+    if (idNumber > 64 && idNumber < 91) {
+      idNumber = (idNumber-63)*1000;
+    }
+    else {
+      idNumber = 28000;
+   }
+
+
 
     for(var i = idNumber; i > (idNumber-1000); i--) {
       // check for the first existing tag from the top 
