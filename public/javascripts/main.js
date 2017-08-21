@@ -117,6 +117,12 @@ function displayTags() {
     });
   })
 
+  $('#holder').keyup(function(keyTyped) {
+    if(keyTyped.which == 13) {
+      $('#idreserver').click();
+    }
+  })
+
   $( "body" ).on( "click", "button.deleteButton", function() {
     
     var idToBeErased = this.value;
