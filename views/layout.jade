@@ -2,19 +2,37 @@ doctype html
 html
     head
         title= "Tag Console"
-        link(rel='stylesheet', href='/styles/style.css')
+        
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
         link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
+        link(rel='stylesheet', href='/styles/style.css')
     body
-        .row
-            .col-lg-1
-                ul.nav.nav-pills.nav-stacked
-                  li
+
+      #container1
+        #main.container
+          .box.group
+            .pane-head
+              br
+              nav.navbar.navbar-default(role='navigation')
+                .navbar-header
+                  button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                .navbar-collapse.collapse
+                  ul.nav.navbar-nav.navbar-center
+                    li
                       a(href='/') All Tags
-                  li
+                    li
                       a(href='/idhold') ID Hold
-        block content
-        br
-        br
+              img(src='/images/tealium_logo.png')
+              h3 Tag Console
+              .tealium-contact.clearfix
+          #main-form
+            br 
+            br
+            block content
+            br
+            br
         script(src='/javascripts/main.js')
