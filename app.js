@@ -96,7 +96,7 @@ var timeString = "";
             var requestTimes = Math.ceil((idArray.length)/numberOfRequests);
 
 
-            for(var i = 44; i <= (44+requestTimes); i++ ) {
+            for(var i = 49; i <= (49+requestTimes); i++ ) {
                 if (i >= 60){
                     i = (i - 60);
                     timeString += i + ",";
@@ -107,9 +107,9 @@ var timeString = "";
                 }
 
             }
+            timeString = timeString.substring(0, (timeString.length -1));
 
-
-            timeString += "3" + " * * * *";
+            timeString += " * * * *";
             console.log(timeString);
             startScheduler(timeString , idArray);
 
@@ -137,17 +137,15 @@ function startScheduler (timeString, idArray) {
         for (var i = indexTracker; i < indexEndTracker; i++ ) {
             (function(x) {
                 // Add Title and ID
-                tagData[idArray[x].id] = {};
-                tagData[idArray[x].id].title = idArray[x].title;
-
                 github.repos.getCommits({ 
                     owner: "dompham",
                     repo: "utui",
                     path: "stratocaster/templates/utag." + idArray[x].id + ".js"
                 }, function (err,data) {
+                    tagData[idArray[x].id] = {};
+                    tagData[idArray[x].id].title = idArray[x].title;
                     if (err) {
                         // if there is a no correpsonding file name just add it to tagData with ID and Name
-
                         tagData[idArray[x].id].html_url = "N/A";
                         tagData[idArray[x].id].date = "N/A";
                         console.log("------------------------------------------------------");
@@ -179,12 +177,9 @@ function startScheduler (timeString, idArray) {
 
                         // Send the Data to Mongo, Right Now it will send multiple times.
                         if ((Object.keys(tagData).length) === idArray.length)  {
-                            tagData[date] = Date.now;
+                            tagData.date = Date.now();
                             updateMasterTag(tagData);
-
                         }
-
-                        
                     }
                 });
             })(i)
