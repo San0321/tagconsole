@@ -117,12 +117,14 @@ function displayTags() {
     });
   })
 
+  // Enabling Entering to add tags in ID Hold
   $('#holder').keyup(function(keyTyped) {
     if(keyTyped.which == 13) {
       $('#idreserver').click();
     }
   })
 
+  // Supporting Delete Button
   $( "body" ).on( "click", "button.deleteButton", function() {
     
     var idToBeErased = this.value;
