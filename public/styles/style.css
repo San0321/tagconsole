@@ -1,3 +1,7 @@
+
+
+
+
 body {
     background-image: url(/images/as_bg.jpg);
         background-repeat: no-repeat;
@@ -505,3 +509,5 @@ select.form-control {
 }
 
 .clearFix:after{content:'';display:block;width:0;height:0;clear:both}
+
+

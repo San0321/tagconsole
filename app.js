@@ -115,6 +115,7 @@ var timeString = "";
 
         }
     });
+
 //});
 
            
@@ -204,7 +205,7 @@ function startScheduler (timeString, idArray) {
  function updateMasterTag(tagData) {
 
     console.log(JSON.stringify(tagData));
-    database.collection('masterTag').replaceOne({"_id": ObjectId("5994c193f36d284d71c9c5a4")}, tagData, function (err, results){
+    database.collection('masterTag').replaceOne({"_id": ObjectId("5994aab7734d1d3c0a2fea81")}, tagData, function (err, results){
             if(err) { console.log(err); } else {
                 console.log("Tag Data is Newly Updated. ");
             }
@@ -245,7 +246,6 @@ app.use('/',function(req,res,next) {
 
 //Express Routes
 app.use('/', index);
-//app.use('/top50', top50);
 app.use('/taglist', list);
 app.use('/idhold', idhold);
 
