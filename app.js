@@ -23,8 +23,6 @@ MongoClient.connect(url, function(err, db){
     }
 });
 
-
-
 //Init github
 var github = new GitHubApi({
     // optional
@@ -40,10 +38,7 @@ var github = new GitHubApi({
     timeout: 30000 // Timeout is 30 Seconds
 });
 
-// Testing Update to Mongo DB
-
 var latestResourceJSON;
-var temp = [7110, 20010, 6026, 20067, 7117, 4001, 20064, 2045, 7115, 20011, 7129, 7001, 19063, 3108, 20078, 3015, 19004, 25016, 8009, 1066, 17001, 3004, 15022, 20103, 6011, 7050, 11003, 13051, 6020, 1068, 13055, 2013, 17009, 16044, 1191, 13032, 12015, 20052, 7127, 18016, 7125, 13002, 22017, 1157, 23001, '7114.standard', 3005, 20040, 13060, 20087];
 var tagData = {};
 var indexTracker = 0;
 var idArray = [];
@@ -177,14 +172,14 @@ function startScheduler (timeString, idArray) {
 
                         // Send the Data to Mongo, Right Now it will send multiple times.
                         if ((Object.keys(tagData).length) === idArray.length)  {
-                            tagData.date = Date.now();
+                            var date = new Date();
+                            tagData.thisDate = date.toDateString();
                             updateMasterTag(tagData);
                         }
                     }
                 });
             })(i)
         }
-
         // Move both trackers numberOfRequests
         if(indexEndTracker < ((idArray.length))) {
             indexTracker+= numberOfRequests;
@@ -207,14 +202,9 @@ function startScheduler (timeString, idArray) {
     });
 }
 
-
-
-
-
 //Init routes
 const index = require('./routes/index');
 const list = require('./routes/taglist');
-//const top50 = require('./routes/top50');
 const idhold = require('./routes/idhold');
 
 //Init app
