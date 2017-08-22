@@ -20,7 +20,8 @@ function displayTags() {
 
   $.getJSON('/taglist/tags', function(data) {
     //Data is json of IDs
-    window.allTags = data;
+    window.allTags = data[0];
+    window.tagRank = data[1];
     
     //Data ready
 
@@ -32,14 +33,25 @@ function displayTags() {
         for (var id in allTags) {
           if (id === "_id" || id === "date") {
             if (id === "date") {
-              console.log(allTags[id]);
-              $('#date').text("Last Updated on " + allTags[id]);
+              var d = new Date(allTags[id]);
+              $('#date').text("Database Last Updated on " + d);
             }
           } else {
             tableContent += '<tr>';
             tableContent += '<td>' + id + '</td>';
             tableContent += '<td>' + '<a href="' + allTags[id].html_url + '">' + allTags[id].title + '</a>' + '</td>';
-            tableContent += '<td>' + allTags[id].date + '</td>';
+            // If it has a rank
+            if (tagRank[id]) {
+              tableContent += '<td>' + tagRank[id] + '</td>';
+            }else {
+              tableContent += '<td sorttable_customkey="999999">N/A</td>';
+            }
+            // If it has a date
+            if (allTags[id].date !== "N/A") {
+              tableContent += '<td>' + allTags[id].date + '</td>';
+            } else {
+              tableContent += '<td sorttable_customkey="0000-00-00">' + allTags[id].date + '</td>';
+            } 
             tableContent += '</tr>';
           }
         }
