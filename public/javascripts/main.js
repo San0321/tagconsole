@@ -31,13 +31,21 @@ function displayTags() {
 
       case '/': {
         for (var id in allTags) {
-          tableContent += '<tr>';
-          tableContent += '<td>' + id + '</td>';
-          tableContent += '<td>' + '<a href="' + allTags[id].html_url + '">' + allTags[id].title + '</a>' + '</td>';
-          tableContent += '<td>' + allTags[id].date + '</td>';
-          tableContent += '</tr>';
+          if (id === "_id" || id === "date") {
+            if (id === "date") {
+              console.log(allTags[id]);
+              $('#date').text("Last Updated on " + allTags[id]);
+            }
+          } else {
+            tableContent += '<tr>';
+            tableContent += '<td>' + id + '</td>';
+            tableContent += '<td>' + '<a href="' + allTags[id].html_url + '">' + allTags[id].title + '</a>' + '</td>';
+            tableContent += '<td>' + allTags[id].date + '</td>';
+            tableContent += '</tr>';
+          }
         }
       }
+
       break;
 
       case '/idhold':{
@@ -57,17 +65,14 @@ function displayTags() {
             }
           }
 
-
           // it can only pass plainobj or string as in 2nd param (data)
           $.post('/idhold/delete', {'items':JSON.stringify(itemsToBeDeleted)}, function(status) {
-           
             /*
              * reservedList mapping :
              * 
              * reservedList = {"tagid" :"nameofthetag"}
              *
              */ 
-
 
              // gets first table
             for (var i = 0; i < currentMongo.length; i++) {
@@ -88,9 +93,6 @@ function displayTags() {
       default:
       break;
     }
-
-
-
 
     // Inject the whole content string into our existing HTML table
     $('#tagList table tbody').html(tableContent);
