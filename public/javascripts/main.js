@@ -88,9 +88,6 @@ function displayTags() {
       break;
     }
 
-
-
-
     // Inject the whole content string into our existing HTML table
     $('#tagList table tbody').html(tableContent);
 
