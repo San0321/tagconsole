@@ -33,21 +33,25 @@ function displayTags() {
         for (var id in allTags) {
           if (id === "_id" || id === "date") {
             if (id === "date") {
-              var epoch = allTags[id];
-              var d = new Date(0);
-              d.setUTCSeconds(epoch);
+              var d = new Date(allTags[id]);
               $('#date').text("Database Last Updated on " + d);
             }
           } else {
             tableContent += '<tr>';
             tableContent += '<td>' + id + '</td>';
             tableContent += '<td>' + '<a href="' + allTags[id].html_url + '">' + allTags[id].title + '</a>' + '</td>';
+            // If it has a rank
             if (tagRank[id]) {
               tableContent += '<td>' + tagRank[id] + '</td>';
             }else {
-              tableContent += '<td>N/A</td>';
+              tableContent += '<td sorttable_customkey="999999">N/A</td>';
             }
-            tableContent += '<td>' + allTags[id].date + '</td>';
+            // If it has a date
+            if (allTags[id].date !== "N/A") {
+              tableContent += '<td>' + allTags[id].date + '</td>';
+            } else {
+              tableContent += '<td sorttable_customkey="0000-00-00">' + allTags[id].date + '</td>';
+            } 
             tableContent += '</tr>';
           }
         }
