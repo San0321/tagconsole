@@ -33,13 +33,20 @@ function displayTags() {
         for (var id in allTags) {
           if (id === "_id" || id === "date") {
             if (id === "date") {
-              console.log(allTags[id]);
-              $('#date').text("Last Updated on " + allTags[id]);
+              var epoch = allTags[id];
+              var d = new Date(0);
+              d.setUTCSeconds(epoch);
+              $('#date').text("Database Last Updated on " + d);
             }
           } else {
             tableContent += '<tr>';
             tableContent += '<td>' + id + '</td>';
             tableContent += '<td>' + '<a href="' + allTags[id].html_url + '">' + allTags[id].title + '</a>' + '</td>';
+            if (tagRank[id]) {
+              tableContent += '<td>' + tagRank[id] + '</td>';
+            }else {
+              tableContent += '<td>N/A</td>';
+            }
             tableContent += '<td>' + allTags[id].date + '</td>';
             tableContent += '</tr>';
           }
