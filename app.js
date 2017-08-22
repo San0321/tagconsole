@@ -50,70 +50,70 @@ var timeString = "";
 // Check the Time Zone for setting to 11 
 cron.schedule('* 23 * * *', function(){
 // cron scheduler
-github.authenticate({
-  type: "oauth",
-  token: process.env.GIT_TOKEN
-});
+    github.authenticate({
+      type: "oauth",
+      token: process.env.GIT_TOKEN
+    });
 
-github.repos.getContent({
-  owner: "dompham",
-  repo: "utui",
-  path: "src/utui/dict/config/resource.json"
-}, function(err, data) {
-  if (err) {
-    console.log((err.code));
-  } else {
-    var b64string = data.data.content;
-    latestResourceJSON = new Buffer.from(b64string, 'base64').toString("utf8");
-
-    // replace symbols
-    latestResourceJSON = latestResourceJSON.replace(/\\n/g, "\\n")
-      .replace(/\\'/g, "\\'")
-      .replace(/\\"/g, '\\"')
-      .replace(/\\&/g, "\\&")
-      .replace(/\\r/g, "\\r")
-      .replace(/\\t/g, "\\t")
-      .replace(/\\b/g, "\\b")
-      .replace(/\\f/g, "\\f");
-
-    // remove non-printable and other non-valid JSON chars
-    latestResourceJSON = latestResourceJSON.replace(/[\u0000-\u0019]+/g, "");
-    latestResourceJSON = JSON.parse(latestResourceJSON).manageList;
-
-    // push objects containing id and title to idArray
-    for (var id in latestResourceJSON) {
-      console.log(id);
-      idArray.push({
-        "id": id,
-        "title": latestResourceJSON[id].title
-      });
-    }
-    console.log("this is ID " + idArray[0].id);
-    console.log("This is Title " + idArray[0].title);
-    // console.log(idArray);
-
-    // get when to request
-    var requestTimes = Math.ceil((idArray.length) / numberOfRequests);
-
-
-    for (var i = 49; i <= (49 + requestTimes); i++) {
-      if (i >= 60) {
-        i = (i - 60);
-        timeString += i + ",";
-        i += 60;
+    github.repos.getContent({
+      owner: "dompham",
+      repo: "utui",
+      path: "src/utui/dict/config/resource.json"
+    }, function(err, data) {
+      if (err) {
+        console.log((err.code));
       } else {
-        timeString += i + ",";
+        var b64string = data.data.content;
+        latestResourceJSON = new Buffer.from(b64string, 'base64').toString("utf8");
+
+        // replace symbols
+        latestResourceJSON = latestResourceJSON.replace(/\\n/g, "\\n")
+          .replace(/\\'/g, "\\'")
+          .replace(/\\"/g, '\\"')
+          .replace(/\\&/g, "\\&")
+          .replace(/\\r/g, "\\r")
+          .replace(/\\t/g, "\\t")
+          .replace(/\\b/g, "\\b")
+          .replace(/\\f/g, "\\f");
+
+        // remove non-printable and other non-valid JSON chars
+        latestResourceJSON = latestResourceJSON.replace(/[\u0000-\u0019]+/g, "");
+        latestResourceJSON = JSON.parse(latestResourceJSON).manageList;
+
+        // push objects containing id and title to idArray
+        for (var id in latestResourceJSON) {
+          console.log(id);
+          idArray.push({
+            "id": id,
+            "title": latestResourceJSON[id].title
+          });
+        }
+        console.log("this is ID " + idArray[0].id);
+        console.log("This is Title " + idArray[0].title);
+        // console.log(idArray);
+
+        // get when to request
+        var requestTimes = Math.ceil((idArray.length) / numberOfRequests);
+
+        // starting at 1 minute
+        for (var i = 1; i <= (1 + requestTimes); i++) {
+          if (i >= 60) {
+            i = (i - 60);
+            timeString += i + ",";
+            i += 60;
+          } else {
+            timeString += i + ",";
+          }
+
+        }
+        timeString = timeString.substring(0, (timeString.length - 1));
+
+        timeString += " * * * *";
+        console.log(timeString);
+        startScheduler(timeString, idArray);
+
       }
-
-    }
-    timeString = timeString.substring(0, (timeString.length - 1));
-
-    timeString += " * * * *";
-    console.log(timeString);
-    startScheduler(timeString, idArray);
-
-  }
-});
+    });
 
 });
 
