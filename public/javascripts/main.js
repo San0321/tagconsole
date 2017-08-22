@@ -20,7 +20,8 @@ function displayTags() {
 
   $.getJSON('/taglist/tags', function(data) {
     //Data is json of IDs
-    window.allTags = data;
+    window.allTags = data[0];
+    window.tagRank = data[1];
     
     //Data ready
 

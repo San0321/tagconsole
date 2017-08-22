@@ -9,7 +9,7 @@ router.get('/tags', function(req, res) {
         console.log(err);
     }
     else {
-        res.json(result[0]);
+        res.json(result);
     }
 });
 
