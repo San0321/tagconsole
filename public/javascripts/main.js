@@ -117,7 +117,7 @@ function displayTags() {
         td0 = tr[i].getElementsByTagName("td")[0];
         td1 = tr[i].getElementsByTagName("td")[1];
         if (td1) {
-          if (td1.innerHTML.toUpperCase().indexOf(filter) > -1 || td0.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          if (td1.textContent.toUpperCase().indexOf(filter) > -1 || td0.innerHTML.toUpperCase().indexOf(filter) > -1) {
             tr[i].style.display = "";
           } else {
             tr[i].style.display = "none";
