@@ -39,7 +39,7 @@ function displayTags() {
           } else {
             tableContent += '<tr>';
             tableContent += '<td>' + id + '</td>';
-            tableContent += '<td>' + '<a href="' + allTags[id].html_url + '">' + allTags[id].title + '</a>' + '</td>';
+            tableContent += '<td>' + '<a href="' + allTags[id].html_url + '"target="_blank">' + allTags[id].title + '</a>' + '</td>';
             // If it has a rank
             if (tagRank[id]) {
               tableContent += '<td>' + tagRank[id] + '</td>';
