@@ -76,8 +76,9 @@ function displayTags() {
             }
           }
 
+          if (itemsToBeDeleted[0]) {
           // it can only pass plainobj or string as in 2nd param (data)
-          $.post('/idhold/delete', {'items':JSON.stringify(itemsToBeDeleted)}, function(status) {
+            $.post('/idhold/delete', {'items':JSON.stringify(itemsToBeDeleted)}, function(status) {
             /*
              * reservedList mapping :
              * 
@@ -86,17 +87,13 @@ function displayTags() {
              */ 
 
              // gets first table
-            for (var i = 0; i < currentMongo.length; i++) {
-              reservedList[currentMongo[i].id] = currentMongo[i].name;
-              tableContent += '<tr>';
-              tableContent += '<td>' + currentMongo[i].id + '</td>';
-              tableContent += '<td>' + currentMongo[i].name + '</td>';
-              tableContent += '<td><button class="deleteButton" value='+currentMongo[i].id+'>Delete</button></td>';
-              tableContent += '</tr>';
-              $('#tagList table tbody').html(tableContent);
-            }
-          })
-
+              updateReservedList(currentMongo)
+            
+            })
+          }
+          else {
+            updateReservedList(currentMongo);
+          }
         });
       }
       break;
@@ -161,11 +158,15 @@ function displayTags() {
       alert("Please Type Tag Name to Add Tags");
       return;
     }
-   
-    if (reservedList[tagNametobeInserted]) {
-      alert("Tag Name already exists");
-      return;
+
+    // checks for duplicates in the reserved list
+    for (var key in reservedList) {
+      if(reservedList[key] === tagNametobeInserted) {
+        alert("Tag Name already exists");
+        return;
+      }
     }
+
     // get the first alphabet
     idNumber = tagNametobeInserted[0].toUpperCase(); 
     idNumber = idNumber.charCodeAt(0);
@@ -179,10 +180,8 @@ function displayTags() {
       idNumber = 28000;
    }
 
-
-
+    // check for the first existing tag from the top    
     for(var i = idNumber; i > (idNumber-1000); i--) {
-      // check for the first existing tag from the top 
       if(allTags[i]) {
         i++;
         idNumber = i;
@@ -220,9 +219,21 @@ function displayTags() {
         tableContent += '<td>' + reservedList[key] + '</td>';
         tableContent += '<td><button class="deleteButton" value='+key+'>Delete</button></td>';
         tableContent += '</tr>';
-        console.log(reservedList[key]);
+       // console.log(reservedList[key]);
         $('#tagList table tbody').html(tableContent);
       }
+  }
+
+  function updateReservedList(currentMongo) {
+    for (var i = 0; i < currentMongo.length; i++) {
+      reservedList[currentMongo[i].id] = currentMongo[i].name;
+      tableContent += '<tr>';
+      tableContent += '<td>' + currentMongo[i].id + '</td>';
+      tableContent += '<td>' + currentMongo[i].name + '</td>';
+      tableContent += '<td><button class="deleteButton" value='+currentMongo[i].id+'>Delete</button></td>';
+      tableContent += '</tr>';
+      $('#tagList table tbody').html(tableContent);
+    }
   }
 
 };
