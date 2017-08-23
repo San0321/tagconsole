@@ -16,6 +16,13 @@ h3 {
 #holder {
     display: inline-block !important;
 }
+.no-right-pad {
+    padding-right: 0;
+
+}
+.no-left-pad {
+    padding-left: 0;
+}
 
 .center-header {
     text-align: center;
@@ -95,6 +102,11 @@ h3 {
     color: #FFF;
     box-shadow: 0 0 3px rgba(0,0,0,.3) inset;
 }
+
+th {
+    cursor: pointer;
+}
+
 
 .pane {
     width: 450px;

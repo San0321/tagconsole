@@ -3,18 +3,22 @@ extends layout
 block content
 
     .row
-        .col-lg-offset-5.col-lg-4
-                input#holder(placeholder='Name or ID', type='text')  
-                button#idreserver() Add
+        .col-lg-offset-4.col-lg-4
+                .form-group
+                    .row
+                        .col-lg-9.no-right-pad
+                            input#holder(placeholder='Name or ID', type='text').form-control
+                        .col-lg-3.no-left-pad
+                            button#idreserver.btn.btn-primary.btn-md.form-control Reserve
 
     .row
         .col-lg-offset-4.col-lg-4
- 
             #wrapper
                 br
                 #tagList
-                    table.three
+                    table
                         thead
                             th ID
                             th Tag Name
+                            th Manual Delete
                         tbody
