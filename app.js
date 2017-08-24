@@ -108,7 +108,7 @@ cron.schedule('* 23 * * *', function(){
         }
         timeString = timeString.substring(0, (timeString.length - 1));
 
-        timeString += " * * * *";
+        timeString += " 23 * * *";
         console.log(timeString);
         startScheduler(timeString, idArray);
 

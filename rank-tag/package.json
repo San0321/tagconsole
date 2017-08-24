@@ -1,0 +1,16 @@
+{
+  "name": "excel-to-json",
+  "version": "1.0.0",
+  "description": "",
+  "main": "rank-tag.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "San",
+  "license": "ISC",
+  "dependencies": {
+    "excel": "^0.1.7",
+    "fs": "0.0.1-security",
+    "mongodb": "^2.2.31"
+  }
+}

@@ -31,10 +31,9 @@ function displayTags() {
 
       case '/': {
         for (var id in allTags) {
-          if (id === "_id" || id === "date") {
-            if (id === "date") {
-              var d = new Date(allTags[id]);
-              $('#date').text("Database Last Updated on " + d);
+          if (id === "_id" || id === "thisDate") {
+            if (id === "thisDate") {
+              $('#date').text("Database Last Updated on " + allTags[id]);
             }
           } else {
             tableContent += '<tr>';
