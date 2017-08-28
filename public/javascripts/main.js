@@ -47,7 +47,7 @@ function displayTags() {
             }
             // If it has a date
             if (allTags[id].date !== "N/A") {
-              tableContent += '<td>' + allTags[id].date + '</td>';
+              tableContent += '<td>' + allTags[id].date.substring(0, (allTags[id].date.length-3)) + '</td>';
             } else {
               tableContent += '<td sorttable_customkey="0000-00-00">' + allTags[id].date + '</td>';
             } 

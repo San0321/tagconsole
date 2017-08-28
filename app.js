@@ -11,6 +11,8 @@ var cron = require('node-cron');
 var ObjectId = require('mongodb').ObjectId;
 
 
+
+
 // Init Database
 var database;
 
@@ -147,11 +149,14 @@ function startScheduler(timeString, idArray) {
             // if there is a no correpsonding file name just add it to tagData with ID and Name
             tagData[idArray[x].id].html_url = "N/A";
             tagData[idArray[x].id].date = "N/A";
+            // debug purpose
             console.log("------------------------------------------------------");
             console.log(Object.keys(tagData).length + " This is Object's Length");
             console.log("------------------------------------------------------");
             console.log(x);
+
           } else {
+            // debug purpose
             console.log("ID and Title are " + idArray[x]);
             console.log("ID is " + idArray[x].id);
             console.log("This is an IndexTracker " + indexTracker);
@@ -216,6 +221,9 @@ const idhold = require('./routes/idhold');
 
 //Init app
 const app = express();
+
+//Display favicon
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 //View engine
 app.set('views', path.join(__dirname, 'views'));
